@@ -1,6 +1,11 @@
 import { useState } from 'react'
-import { SafeAreaView, View, Text, StyleSheet, FlatList } from 'react-native';
-
+import { 
+  Button,
+  SafeAreaView, 
+  View, 
+  Text,
+  TextInput,
+  StyleSheet, } from 'react-native';
 const styles = StyleSheet.create({
   caption: {
     color: 'amber',
@@ -14,15 +19,47 @@ const styles = StyleSheet.create({
 })
 
 export default function TodoApp() {
+  const [list,setList] = useState<[Todo]>(todos);
+
+  function addTodo(todo: Todo) {
+    const _todos = [...list]
+    if(todo.id==='') {
+      todo.id = (list.length).toString()
+    }
+    _todos.push(todo)
+    setList(_todos)
+  }
   return (
    <SafeAreaView style={styles.center}>
     <Text style={styles.caption}>Todo Demo</Text>
     <View>
-      <TodoList list={todos} />
+      <AddTodo add={addTodo} />
+      <TodoList list={list} />
     </View> 
    </SafeAreaView>
   );
 }
+
+const AddTodo = ({add}) => {
+  const [task, setTask] = useState('')
+
+  const addTask = (e)=> {
+    const todo: Todo = {
+      id: '',
+      task,
+      completed: false,
+    }
+    add(todo);
+    setTask('')
+  }
+  return (
+    <View>
+      <TextInput value={task} onChangeText={setTask} placeholder='new task'></TextInput>
+      <Button title='add' onPress={addTask} />
+    </View>
+  )
+}
+
 
 const TodoList = ({list}: {list: [Todo]}) => {
   return (
@@ -36,6 +73,7 @@ const TodoList = ({list}: {list: [Todo]}) => {
 }
 const TodoItem = ({todo}: {todo: Todo})=> (
     <View>
+      <Text>{todo.id} - </Text>
       <Text>{todo.task}</Text>
     </View>
   )
