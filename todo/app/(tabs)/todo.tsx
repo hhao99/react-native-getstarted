@@ -65,7 +65,7 @@ const TodoList = ({list}: {list: [Todo]}) => {
   return (
     <View>
       { list && list.length >0 ?
-      list.map( (todo: Todo) => <TodoItem todo={todo}/> )
+      list.map( (todo: Todo) => <TodoItem key={todo.id} todo={todo}/> )
       :
       (<Text>List is empty</Text>)}
     </View>
