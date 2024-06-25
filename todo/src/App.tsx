@@ -4,22 +4,21 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Hello Todo!</Text>
+      <Text style={styles.caption}>Hello!</Text>
       <StatusBar style="auto" />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  header: {
-    fontSize: 36,
-    color: '#70e',
-    fontWeight: 'bold',
-  },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#7a7',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  caption: {
+    fontSize: 24,
+    fontWeight: 'bold'
+  }
 });
